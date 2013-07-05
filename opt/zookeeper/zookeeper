@@ -1,0 +1,48 @@
+#!/bin/bash
+
+if [[ -e /misc/cd/context.sh ]]; 
+then
+    source /misc/cd/context.sh
+fi;
+
+export ZK_HOME=/opt/zookeeper
+export ZK_CDIR=${ZK_HOME}/conf
+export ZK_DDIR=/tmp/zookeeper
+mkdir ${ZK_DDIR}
+
+start()
+{
+    echo "Starting Zookeeper"
+    
+    IP=`ifconfig eth0 | grep inet | cut -d: -f2 | gawk '{print $1}'`
+
+    echo "... configuring"
+    cp ${ZK_CDIR}/zoo.cfg.tmpl ${ZK_CDIR}/zoo.cfg
+    echo "dataDir=${ZK_DDIR}" >> ${ZK_CDIR}/zoo.cfg
+
+    j=1
+    IFS=" "
+    set ${ZK_PEERS}
+    for item;   
+    do
+	echo "server.${j}=${item}:2888:3888" >> ${ZK_CDIR}/zoo.cfg
+	if [[ ${item} == ${IP} ]];
+	then
+	    echo "... creating id"
+	    echo "${j}" > ${ZK_DDIR}/myid 
+	fi;
+	j=$[j+1]
+    done
+    
+    echo "... launching"
+    ${ZK_HOME}/bin/zkServer.sh start
+    echo $! > /var/run/zk.pid
+}
+
+stop()
+{
+    echo "Stopping Zookeeper"
+    PID=`cat /var/run/zk.pid`
+    kill ${PID}
+    rm /var/run/zk.pid
+}

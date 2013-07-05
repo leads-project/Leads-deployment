@@ -1,0 +1,26 @@
+2013-06-28 09:57:27,927 INFO  (main) [org.infinispan.server.core.Main$] ISPN005001: Start main with args: -l, localhost, -r, hotrod
+2013-06-28 09:57:28,065 DEBUG (InfinispanServer-Main) [org.infinispan.util.ModuleProperties] Loading lifecycle SPI class: org.infinispan.server.memcached.LifecycleCallbacks@50bc82
+2013-06-28 09:57:28,066 DEBUG (InfinispanServer-Main) [org.infinispan.util.ModuleProperties] Loading lifecycle SPI class: org.infinispan.server.hotrod.LifecycleCallbacks@1d7945d
+2013-06-28 09:57:28,072 DEBUG (InfinispanServer-Main) [org.infinispan.util.ModuleProperties] Loading lifecycle SPI class: org.infinispan.cli.interpreter.LifecycleCallbacks@4cd3a8
+2013-06-28 09:57:28,073 DEBUG (InfinispanServer-Main) [org.infinispan.util.ModuleProperties] Loading lifecycle SPI class: org.infinispan.server.core.LifecycleCallbacks@5065a2
+2013-06-28 09:57:28,122 DEBUG (InfinispanServer-Main) [org.infinispan.util.ModuleProperties] No module command extensions to load
+2013-06-28 09:57:28,138 DEBUG (InfinispanServer-Main) [org.infinispan.manager.DefaultCacheManager] Started cache manager ISPN on null
+2013-06-28 09:57:28,149 DEBUG (InfinispanServer-Main) [org.infinispan.server.hotrod.HotRodServer] Starting server with basic settings: host=localhost, port=11222, masterThreads=-1, workerThreads=8, idleTimeout=-1, tcpNoDelay=true, sendBufSize=0, recvBufSize=0
+2013-06-28 09:57:28,308 DEBUG (InfinispanServer-Main) [org.infinispan.interceptors.InterceptorChain] Interceptor chain size: 6
+2013-06-28 09:57:28,308 DEBUG (InfinispanServer-Main) [org.infinispan.interceptors.InterceptorChain] Interceptor chain is: 
+	>> org.infinispan.interceptors.InvocationContextInterceptor
+	>> org.infinispan.interceptors.CacheMgmtInterceptor
+	>> org.infinispan.interceptors.NotificationInterceptor
+	>> org.infinispan.interceptors.locking.NonTransactionalLockingInterceptor
+	>> org.infinispan.interceptors.EntryWrappingInterceptor
+	>> org.infinispan.interceptors.CallInterceptor
+2013-06-28 09:57:28,315 DEBUG (InfinispanServer-Main) [org.infinispan.CacheImpl] Started cache ___defaultcache on null
+2013-06-28 10:06:52,664 INFO  (ShutdownHookThread) [org.infinispan.server.core.ShutdownHook] ISPN005002: Posting Shutdown Request to the server...
+2013-06-28 10:06:52,667 DEBUG (StopThread) [org.infinispan.server.hotrod.HotRodServer] Stopping server listening in localhost:11222
+2013-06-28 10:06:52,674 DEBUG (StopThread) [org.infinispan.server.core.transport.NettyTransport] Channel group completely closed, release external resources
+2013-06-28 10:06:52,681 DEBUG (StopThread) [org.infinispan.server.hotrod.HotRodServer] Server stopped
+2013-06-28 10:06:52,681 DEBUG (StopThread) [org.infinispan.manager.DefaultCacheManager] Stopping cache manager ISPN on null
+2013-06-28 10:06:52,683 DEBUG (StopThread) [org.infinispan.CacheImpl] Stopping cache ___defaultcache on null
+2013-06-28 10:06:52,690 DEBUG (StopThread) [org.infinispan.transaction.TransactionTable] Wait for on-going transactions to finish for 30 seconds.
+2013-06-28 10:06:52,690 DEBUG (StopThread) [org.infinispan.transaction.TransactionTable] All transactions terminated
+

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+source /etc/local.d/vmcontextgentoo
+stop

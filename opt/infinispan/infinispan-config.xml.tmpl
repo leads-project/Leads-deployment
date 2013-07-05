@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<infinispan
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="urn:infinispan:config:5.0 http://www.infinispan.org/schemas/infinispan-config-5.0.xsd"
+      xmlns="urn:infinispan:config:5.0">
+
+   <global>
+      <transport clusterName="infinispan" nodeName="@NODENAME@" >
+	<properties>
+          <property name="configurationFile" value="/opt/infinispan/conf/jgroups.xml" />
+	</properties>
+      </transport>
+      <globalJmxStatistics
+            enabled="true" 
+            jmxDomain="org.infinispan" 
+            cacheManagerName="SampleCacheManager"/>
+   </global>
+
+   <default>
+      <transaction />
+      <invocationBatching enabled="true" />
+      <clustering mode="dist"/>
+   </default>
+
+   <!--
+      A distributed cache that uses highly scalable, consistent hash based distribution to store entries on remote
+      cluster nodes.
+
+      numOwners: number of owners for each entry.  The larger this number is, the safer your data will be, but the
+                 slower the cluster will be.
+
+      rehashRpcTimeout: timeout used for RPC calls relating to rehashing.  This defaults to 600000 (10 minutes).
+
+      See:
+         http://community.jboss.org/wiki/Clusteringmodes#distribution
+   -->
+
+   <namedCache name="distributedCache">
+      <clustering mode="distribution">
+         <sync/>
+         <hash
+            numOwners="1"
+            rehashWait="120000"
+            rehashRpcTimeout="600000"
+         />
+      </clustering>
+      <jmxStatistics enabled="true"/>
+   </namedCache>
+
+</infinispan>

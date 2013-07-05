@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [[ -e /opt/infinispan ]]; 
+then
+    source /etc/local.d/infinispan
+    start
+fi;
+

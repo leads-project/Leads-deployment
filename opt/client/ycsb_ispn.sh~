@@ -1,0 +1,8 @@
+#!/bin/sh
+
+IP=`ifconfig eth0 | grep "inet addr" | cut -d: -f2 | gawk '{print $1}'`
+BCASTIP=`ifconfig eth0 | grep "inet addr" | cut -d: -f3 | gawk '{print $1}'`
+sed s/\@NODENAME\@/client/ infinispan-config.xml.tmpl > infinispan-config.xml
+sed s/\@BPING_ADDR@\@/192.168.79.83/ jgroups.xml.tmpl > jgroups.xml
+
+java -cp /opt/ycsb/core/lib/core-0.1.4.jar:"/opt/ycsb/infinispan-binding/lib/*":/opt/ycsb/infinispan-binding/conf/:/opt/ycsb/infinispan-binding/lib/com/yahoo/ycsb/db  com.yahoo.ycsb.Client -load -db com.yahoo.ycsb.db.InfinispanClient -s -P workloads/workloada

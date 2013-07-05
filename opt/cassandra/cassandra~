@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [[ -e /misc/cd/context.sh ]]; 
+then
+    source /misc/cd/context.sh
+fi;
+
+export CASSANDRA_HOME=/opt/cassandra/
+export CASSANDRA_CONF=${CASSANDRA_HOME}/conf
+
+start()
+{
+    echo "Starting Cassandra"	    
+    IP=`ifconfig eth0 | grep inet | cut -d: -f2 | gawk '{print $1}'`
+    if [[ ${CASSANDRA_SEED} == "" ]];
+    then
+	CASSANDRA_SEED=${IP}
+    fi;
+    sed s/\@LISTEN_ADDR\@/${IP}/ ${CASSANDRA_CONF}/cassandra.yaml.tmpl | sed s/\@SEED_ADDR\@/${CASSANDRA_SEED}/  > ${CASSANDRA_CONF}/cassandra.yaml
+    ${CASSANDRA_HOME}/bin/cassandra -p /var/run/cassandra.pid &> /var/null
+}
+
+stop()
+{
+    echo "Stopping Cassandra"
+    PID=`cat /var/run/cassandra.pid`
+    kill ${PID}
+    rm /var/run/cassandra.pid
+}

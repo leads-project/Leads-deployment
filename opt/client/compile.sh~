@@ -1,0 +1,1 @@
+javac -source 1.6 -target 1.6 -cp ../../ycsb-0.1.4/core/lib/core-0.1.4.jar:"../../infinispan/lib/*" InfinispanClient.java

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+. /etc/profile
+export PATH=/opt/cassandra/bin:/opt/ycsb/bin:/opt/infinispan/bin:$PATH

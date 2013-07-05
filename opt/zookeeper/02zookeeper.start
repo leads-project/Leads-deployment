@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [[ -e /opt/zookeeper ]]; 
+then
+    source /etc/local.d/zookeeper
+    start
+fi;
+
