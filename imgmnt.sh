@@ -3,7 +3,7 @@
 source config.sh
 
 mount(){
-    sudo mount -o loop,rw,offset=32256 ${IMG_GENTOO} ${MOUNT_ROOT}
+    sudo mount -o loop,users,rw,offset=32256 ${IMG_GENTOO} ${MOUNT_ROOT}
     sudo mount -t proc /proc/ ${MOUNT_PROC}
     sudo mount -o loop,rw,offset=512 ${IMG_OPT} ${MOUNT_OPT}
 
