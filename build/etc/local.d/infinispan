@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 if [[ -e /misc/cd/context.sh ]]; 
@@ -7,16 +6,15 @@ then
 fi;
 
 export INFINISPAN_HOME=/opt/infinispan
-export INFINISPAN_CONF=${INFINISPAN_HOME}/conf
+export INFINISPAN_CONF=${INFINISPAN_HOME}/standalone/configuration
 
 start()
 {
     echo "Starting Infinispan"	    
     IP=`ifconfig eth0 | grep "inet addr" | cut -d: -f2 | gawk '{print $1}'`
-    sed s/\@NODENAME\@/${IP}/ ${INFINISPAN_CONF}/infinispan-config.xml.tmpl > ${INFINISPAN_CONF}/infinispan-config.xml
     BCASTIP=`ifconfig eth0 | grep "inet addr" | cut -d: -f3 | gawk '{print $1}'`
-    sed s/\@BPING_ADDR\@/${BCASTIP}/ ${INFINISPAN_CONF}/jgroups.xml.tmpl > ${INFINISPAN_CONF}/jgroups.xml
-    ${INFINISPAN_HOME}/bin/startServer.sh -l ${IP} -r hotrod -c ${INFINISPAN_HOME}/conf/infinispan-config.xml &> /dev/null &
+    sed 's/\@NODE_IP\@/${IP}/g' ${INFINISPAN_CONF}/infinispan-config.xml.tmpl | sed 's/\@BPING_ADDR\@/${BCASTIP}/g'  > ${INFINISPAN_CONF}/infinispan-config.xml
+    ${INFINISPAN_HOME}/bin/clustered.sh -c infinispan-config.xml &> /var/log/infinispan.log &
     echo $! > /var/run/infinispan.pid
 }
 
