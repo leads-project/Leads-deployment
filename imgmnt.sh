@@ -3,9 +3,9 @@
 source config.sh
 
 mount(){
-    sudo mount -o loop,users,rw,offset=32256 ${IMG_GENTOO} ${MOUNT_ROOT}
-    sudo mount -t proc /proc/ ${MOUNT_PROC}
-    sudo mount -o loop,rw,offset=512 ${IMG_OPT} ${MOUNT_OPT}
+    sudo mount -o loop,rw,exec,offset=32256 ${IMG_GENTOO} ${MOUNT_ROOT}
+    sudo mount -t proc -o dev,rw,exec /proc/ ${MOUNT_PROC}
+    sudo mount -o loop,rw,exec,offset=512 ${IMG_OPT} ${MOUNT_OPT}
 
     sudo mount -rt squashfs -o loop,nodev,noexec ${IMG_SQFS_KERNEL_SRC} ${MOUNT_KERNEL_SRC_RO}
     sudo unionfs-fuse -o cow,nonempty,allow_other ${MOUNT_KERNEL_SRC_RW}=RW:${MOUNT_KERNEL_SRC_RO}=RO ${MOUNT_KERNEL_SRC}

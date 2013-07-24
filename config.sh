@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR_ROOT="/home/otrack/ALL/myWork/Implementation/OpenNebula"
+DIR_ROOT="/home/otrack/ALL/myWork/Implementation/Leads-OpenNebula"
 DIR_IMG="${DIR_ROOT}/images"
 
 ### Images

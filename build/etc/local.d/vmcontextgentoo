@@ -1,9 +1,11 @@
 #!/sbin/runscript
 
-export CONFIGFILE="/etc/conf.d/net"
+if [[ -e /misc/cd/context.sh ]]; 
+then
+    source /misc/cd/context.sh
+fi;
 
-# Synchronize time
-ntpd -g -c /etc/ntp.conf
+export CONFIGFILE="/etc/conf.d/net"
 
 # Gets IP address from a given MAC
 mac2ip() {
@@ -65,14 +67,14 @@ gen_interface() {
     MAC=`get_mac $DEV_MAC`
     IP=`mac2ip $MAC`
     NETWORK=`get_network $IP`
-
-#    echo "config_${DEV}=\"dhcp\""
-
-    echo "config_${DEV}=\"${IP}/24\"" 
-    if [ $DEV == "eth0" ]; then
- 	echo "routes_${DEV}=\"default via ${NETWORK}.1\""
-    fi 
-
+    if [[ -n $DHCP ]]; then	
+	echo "config_${DEV}=\"dhcp\""
+    else
+	echo "config_${DEV}=\"${IP}/24\"" 
+	if [ $DEV == "eth0" ]; then
+ 	    echo "routes_${DEV}=\"default via ${NETWORK}.1\""
+	fi 
+    fi
     echo ""
 }
 

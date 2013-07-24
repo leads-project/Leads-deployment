@@ -4,7 +4,6 @@
 
    <TCP
         bind_addr="${jgroups.tcp.address:@NODE_IP@}"
-        bind_port="${jgroups.tcp.port:7800}"
         port_range="30"
         recv_buf_size="20m"
         send_buf_size="640k"
@@ -32,7 +31,7 @@
         oob_thread_pool.rejection_policy="Discard"        
          />
 
-   <BPING dest="@BPING_ADDR@" bind_port="7801"/>
+   <BPING dest="@BPING_ADDR@" port_range="20"/>
 
    <MERGE2 max_interval="30000" min_interval="10000"/>
    <FD_SOCK/>
@@ -54,7 +53,7 @@
              conn_expiry_timeout="0"/>
    <pbcast.STABLE stability_delay="500" desired_avg_gossip="5000" max_bytes="1m"/>
    <pbcast.GMS print_local_addr="false" join_timeout="3000" view_bundling="true"/>
-   <SEQUENCER/>
+   <tom.TOA/>
    <UFC max_credits="200k" min_threshold="0.20"/>
    <MFC max_credits="200k" min_threshold="0.20"/>
    <FRAG2 frag_size="60000"/>
