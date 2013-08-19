@@ -1,5 +1,5 @@
 - shrink the images size
-- undertand how cross-site replication and the grouping API works
+- understand how cross-site replication and the grouping API works
 - deploy (emulated) multiple sites in open-nebula
 - contribs publicly available
 - add the proper hostname to the shell prompt
