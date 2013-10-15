@@ -8,10 +8,10 @@ mount(){
     sudo mount -o loop,rw,exec,offset=512 ${IMG_OPT} ${MOUNT_OPT}
 
     sudo mount -rt squashfs -o loop,nodev,noexec ${IMG_SQFS_KERNEL_SRC} ${MOUNT_KERNEL_SRC_RO}
-    sudo unionfs-fuse -o cow,nonempty,allow_other ${MOUNT_KERNEL_SRC_RW}=RW:${MOUNT_KERNEL_SRC_RO}=RO ${MOUNT_KERNEL_SRC}
+    sudo unionfs-fuse -o cow,allow_other,use_ino,suid,dev,nonempty  ${MOUNT_KERNEL_SRC_RW}=RW:${MOUNT_KERNEL_SRC_RO}=RO ${MOUNT_KERNEL_SRC}
 
     sudo mount -rt squashfs -o loop,nodev,noexec ${IMG_SQFS_PORTAGE} ${MOUNT_PORTAGE_RO}
-    sudo unionfs-fuse -o cow,nonempty,allow_other ${MOUNT_PORTAGE_RW}=RW:${MOUNT_PORTAGE_RO}=RO ${MOUNT_PORTAGE}
+    sudo unionfs-fuse -o cow,allow_other,use_ino,suid,dev,nonempty ${MOUNT_PORTAGE_RW}=RW:${MOUNT_PORTAGE_RO}=RO ${MOUNT_PORTAGE}
     wait
 }
 

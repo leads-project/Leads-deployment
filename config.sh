@@ -20,12 +20,12 @@ MOUNT_PORTAGE="${MOUNT_ROOT}/usr/portage"
 
 # portage
 MOUNT_PORTAGE_RW="/dev/shm/portage-rw" 
-[ -d ${MOUNT_PORTAGE_RW} ] || mkdir -p ${MOUNT_PORTAGE_RW}
+[ -d ${MOUNT_PORTAGE_RW} ] || sudo mkdir -p ${MOUNT_PORTAGE_RW}
 MOUNT_PORTAGE_RO="/dev/shm/portage-ro" 
-[ -d ${MOUNT_PORTAGE_RO} ] || mkdir -p ${MOUNT_PORTAGE_RO}
+[ -d ${MOUNT_PORTAGE_RO} ] || sudo mkdir -p ${MOUNT_PORTAGE_RO}
 
 # kernel
 MOUNT_KERNEL_SRC_RW="/dev/shm/kernel-rw" 
-[ -d ${MOUNT_KERNEL_SRC_RW} ] || mkdir -p ${MOUNT_KERNEL_SRC_RW}
+[ -d ${MOUNT_KERNEL_SRC_RW} ] || sudo mkdir -p ${MOUNT_KERNEL_SRC_RW}
 MOUNT_KERNEL_SRC_RO="/dev/shm/kernel-ro" 
-[ -d ${MOUNT_KERNEL_SRC_RO} ] || mkdir -p ${MOUNT_KERNEL_SRC_RO}
+[ -d ${MOUNT_KERNEL_SRC_RO} ] || sudo mkdir -p ${MOUNT_KERNEL_SRC_RO}
