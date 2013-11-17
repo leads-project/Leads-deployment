@@ -2,3 +2,7 @@
 
 . /etc/profile
 export PATH=/opt/cassandra/bin:/opt/ycsb/bin:/opt/infinispan/bin:$PATH
+IPeth0=$(Adr=$(ifconfig eth0 |grep inet); echo $Adr | awk '{print $2}' | cut -c 6- )
+Lastblock=$(echo $IPeth0 | cut -d '.' -f4)
+PS1='\[\e[0;31m\]\u:\[\e[0;33m\]$IPeth0\[\e[m\]\[\e[0;36m\]\w\[\e[0;32m\] #\[\e[m\] \[\e[0;37m\]'
+#PS1='\[\e[0;31m\]\u:\[\e[0;33m\]$Lastblock\[\e[m\]\[\e[0;36m\]\w\[\e[0;32m\] #\[\e[m\] \[\e[0;37m\]'
