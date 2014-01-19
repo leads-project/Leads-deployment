@@ -5,14 +5,14 @@ source configuration.sh
 delay=${1}; # in ms
 rate=${2};  # in kilo bits per seconds
 
-echo ${nuclouds}
 for i in `seq 0 $[${nuclouds}-1]`;
   do 
+    echo "Deploying on UCloud "$i
     ucloud=${uclouds[$i]}
     for j in ${ucloud};
     do
 
-	echo $j
+	echo "Deploying on Node "$j
         ${SSHCMDNODE} $j tc qdisc del dev eth0 root;
         ${SSHCMDNODE} $j tc qdisc add dev eth0 handle 1: root htb default 30
     
