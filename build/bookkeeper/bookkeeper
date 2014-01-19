@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [[ -e /misc/cd/context.sh ]]; 
+then
+    source /misc/cd/context.sh
+fi;
+
+export BK_HOME=/opt/bookkeeper
+export BK_CDIR=${BK_HOME}/conf
+
+start()
+{
+    echo "Starting Bookie"
+    IP=`ifconfig eth0 | grep inet | cut -d: -f2 | gawk '{print $1}'`
+
+    echo "... configuring"
+    mount -t tmpfs -o size=300m tmpfs /tmp
+    sed s/\@ZK_PEERS\@/"${ZK_PEERS}"/ ${BK_CDIR}/bk_server.conf.tmpl > ${BK_CDIR}/bk_server.conf
+    
+    echo "... launching"
+    export 
+    ${BK_HOME}/bin/bookkeeper-daemon.sh start bookie &> /dev/null
+}
+
+stop()
+{
+    echo "Stopping Bookie"
+    ${BK_HOME}/bin/bookkeeper-daemon.sh stop bookie &> /dev/null
+    umount /tmp
+}

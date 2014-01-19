@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [[ -e /opt/bookkeeper ]]; 
+then
+    source /etc/local.d/bookkeeper
+    stop
+fi;
+
