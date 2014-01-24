@@ -9,7 +9,7 @@ ZK_PEERS="192.168.79.201,192.168.79.202,192.168.79.203"
 # for each bookie
 # correct template 
 # then instanciate vm with the appropriate name
-for i in `seq 1 ${NBOOKIES}`for i in `seq 1 ${NBOOKIES}`
+for i in `seq 1 ${NBOOKIES}`
 do
     echo "Instanciating bookie ${i}"
     sed s/\@ZK_PEERS\@/"${ZK_PEERS}"/ ${BK_TMPL_FILE}> tmp
