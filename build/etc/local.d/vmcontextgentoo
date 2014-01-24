@@ -58,7 +58,7 @@ gen_hostname() {
     MAC=$1
     NUM=`mac2ip $MAC | cut -d'.' -f4`
     NUM2=`echo 000000$NUM | sed 's/.*\(..\)/\1/'`
-    echo cluster$NUM2
+    echo $NUM2
 }
 
 gen_interface() {
@@ -92,6 +92,9 @@ start()
 	ln -s /etc/init.d/net.lo /etc/init.d/net.${DEV}
 	/etc/init.d/net.${DEV} start
     done
+
+    IP=`ifconfig eth0 | grep "inet addr" | cut -d: -f2 | awk '{print $1}'`
+    /bin/hostname ${IP}
 }
 
 stop()

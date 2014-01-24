@@ -8,7 +8,7 @@ fi;
 export ZK_HOME=/opt/zookeeper
 export ZK_CDIR=${ZK_HOME}/conf
 export ZK_DDIR=/tmp/zookeeper
-mkdir ${ZK_DDIR}
+mkdir -f ${ZK_DDIR}
 
 start()
 {

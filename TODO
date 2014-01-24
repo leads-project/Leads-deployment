@@ -1,0 +1,4 @@
+- correct stopping command in all scripts
+- add port as an argument (with some default value) to ispn opennebula template
+- correct hostname problem 
+- make an ISPN 6 image (use init script by ISPN team)

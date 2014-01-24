@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR_ROOT="."
+DIR_ROOT="/home/otrack/Implementation/Leads-deployment"
 DIR_IMG="${DIR_ROOT}/images"
 
 ### Images
