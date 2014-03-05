@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ $# -ne 2 ]
+then
+    echo "USAGE: $0 delay rate"
+    exit 1
+fi;
+
 source configuration.sh
 
 delay=${1}; # in ms

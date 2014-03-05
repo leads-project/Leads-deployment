@@ -29,11 +29,11 @@ function listIP(){
 
 clients=(`listIP "bk-client" "psutra"`) 
 bks=(`listIP "bookkeeper" "psutra"`) 
-zks=("192.168.79.201") # "192.168.79.204" "192.168.79.207")
-connectString="192.168.79.201" # |192.168.79.204|192.168.79.207"
+zks=("192.168.79.228" "192.168.79.231" "192.168.79.234")
+connectString="192.168.79.228|192.168.79.231|192.168.79.234"
 
-entrysizes="128 256 512 1024 2048"
-fadeaways="100 250 500 1000"
+entrysizes="2048"
+fadeaways="250 500 1000"
 
 for entrysize in ${entrysizes}
 do
@@ -59,7 +59,7 @@ do
 	done
 	wait
 
-	sleep 30
+	sleep 10
 
 	echo "Starting bookies"
 	let e=${#bks[@]}-1
@@ -70,7 +70,9 @@ do
 	done
 	wait
 
-    	CMD="/opt/bookkeeper/benchmark writes -quorum 2 -ensemble 3 -zookeeper \"${connectString}\" -skipwarmup  -entrysize ${entrysize} -time 45 -fadeaway ${fadeaway} -throttle 100000 -coordnode /coord | grep ops"
+	sleep 10
+
+    	CMD="/opt/bookkeeper/benchmark writes -quorum 2 -ensemble 3 -zookeeper \"${connectString}\" -skipwarmup  -entrysize ${entrysize} -time 20 -fadeaway ${fadeaway} -throttle 100000 -coordnode /coord | grep ops"
 
     	echo "LAUNCHING WITH ${entrysize} ${fadeaway}"
 

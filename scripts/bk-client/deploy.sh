@@ -3,7 +3,7 @@
 source configuration.sh
 
 NAME="bk-client"
-NCLIENTS="10"
+NCLIENTS="20"
 
 scp ${TMPL_FILE} ${USER}@${CLUSTER}:~/tmp
 ${SSHCMDHEAD} onetemplate update ${TMPL_ID} tmp
