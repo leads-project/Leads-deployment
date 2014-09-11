@@ -1,12 +1,15 @@
 #!/bin/bash
 
-USER="USER"
-PASSWORD="PASS"
-CLUSTER="clusterinfo.unineuchatel.ch"
+HOME_DIR="/home/otrack/Implementation/Leads-deployment"
+SCRIPTS_DIR="/home/otrack/Implementation/Leads-deployment/scripts"
 
-SSHCMDHEAD="ssh -l ${USER} ${CLUSTER}"
-SSHCMDNODE="ssh -l root -i id_rsa"
+USER="psutra"
+PASSWORD=""
+CLUSTER="clusterinfo.unineuchatel.ch"
 ID_DATASTORE="100"
-ID_TEMPLATE="237"
 ONE_AUTH_FILE="/home/psutra/one_auth"
+
+SSHCMDHEAD="ssh -l ${USER} ${CLUSTER} ONE_AUTH=${ONE_AUTH_FILE}"
+SSHCMDNODE="ssh -l root -i ${HOME_DIR}/build/id_rsa"
+
 

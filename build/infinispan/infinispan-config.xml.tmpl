@@ -133,7 +133,7 @@
                 <transport type="TCP" socket-binding="jgroups-tcp"/>
                 <protocol type="BPING">
 		  <property name="dest">@BPING_ADDR@</property>
-		  <property name="bind_port">57601</property>
+		  <property name="bind_port">@BPING_PORT@</property>
                 </protocol>
                 <protocol type="MERGE2"/>
                 <protocol type="FD_SOCK" socket-binding="jgroups-tcp-fd"/>

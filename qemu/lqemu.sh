@@ -9,6 +9,6 @@ mkisofs -o blank.iso context.sh
 qemu-system-i386 gentoo.qcow2 -hdb opt.qcow2 \
     -m 1500M \
     -cdrom blank.iso \
-    -net nic,model=rtl8139,macaddr=02:00:c0:a8:4f:41 \
+    -net nic,model=virtio,macaddr=02:00:c0:a8:4f:41
     -net user,hostfwd=tcp:127.0.0.1:11222-:11222
     

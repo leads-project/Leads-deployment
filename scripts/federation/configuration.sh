@@ -10,6 +10,7 @@ ${SSHCMDHEAD} ONE_AUTH=${ONE_AUTH_FILE} "onevm list | grep ${USER} | grep ispn |
 nod=`cat /tmp/nodes`
 IFS=' ' read -a nodes <<<  "${nod}"
 nnodes=${#nodes[@]}
+client="192.168.79.117"
 
 nuclouds="3"
 let nodesPerUcloud=$nnodes/$nuclouds
@@ -33,8 +34,11 @@ do
 	    ucloud=("`echo $ucloud` ${nodes[$i]}")
 	fi
     done
+    if [[ g -eq 1 ]]
+    then 
+	echo "adding client"
+	ucloud=("`echo $ucloud` ${client}")
+    fi
     uclouds[$g-1]=$ucloud
     echo "UCloud "${g}" = ("${ucloud[@]}")"
 done
-
-
