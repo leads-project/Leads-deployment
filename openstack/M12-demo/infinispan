@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [[ -e /misc/cd/context.sh ]]; 
+then
+    source /misc/cd/context.sh
+fi;
+
+export INFINISPAN_HOME=/opt/infinispan
+export INFINISPAN_CONF=${INFINISPAN_HOME}/standalone/configuration
+
+start()
+{
+    echo "Starting Infinispan"	    
+    IP=`ifconfig eth0 | grep "inet addr" | cut -d: -f2 | gawk '{print $1}'`
+    BCASTIP=`ifconfig eth0 | grep "inet addr" | cut -d: -f3 | gawk '{print $1}'`
+    sed s/\@NODE_IP\@/${IP}/g ${INFINISPAN_CONF}/infinispan-config.xml.tmpl | sed s/\@BPING_ADDR\@/${BCASTIP}/g  > ${INFINISPAN_CONF}/infinispan-config.xml
+    ${INFINISPAN_HOME}/bin/clustered.sh -c infinispan-config.xml &> /var/log/infinispan.log &
+    echo $! > /var/run/infinispan.pid
+}
+
+stop()
+{
+    echo "Stopping Infinispan"
+    PID=`cat /var/run/infinispan.pid`
+    kill ${PID}
+    rm /var/run/infinispan.pid
+}

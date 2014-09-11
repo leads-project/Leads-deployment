@@ -1,0 +1,44 @@
+============================
+= Distributed Crawler Demo =
+============================
+
+This distributed crawler demo demonstrates the fundamentals of Infinispan that are 
+listeners, put/get operations and the atomic objects factory. 
+The crawler is clustered and can offer 
+some basic sentiment analysis features using the AlchemyAPI. 
+
+In more details, the crawler implements most of LEADS Use Case 1:
+ - the user provides a list of key words,
+ - the crawler analyzes sentimentally web pages that match the words, and
+ - in case the score is positive, they are stored permanently with their associated score.
+The source code of the crawler is available in the GitHub repository at the 
+following address http://github.com/otrack/Leads-crawler. 
+
+=========
+= USAGE =
+=========
+
+To launch an instance of the crawler, we execute {pcrawl,icrawl}.sh scripts.
+Note that multiple instances can run on the same machine (vertical scalability), or inside the same cluster (horizontal scalability).
+The script pcrawl.sh implements the permanent part of the crawl, and runs continuously to construct an off-line data collection.
+Conversely, icrawl.sh returns the state of the result at the time of its invocation.
+The different crawler instances communicate via Infinispan using a concurrent atomic list to store the next urls to crawl, 
+and a concurrent map to store the results (see D1.2 for more details). 
+
+=================
+= CONFIGURATION =
+================
+
+The crawler is set-up via the config.properties file present at the root of the directory, as illustrated below.
+
+seed=http://www.guardian.co.uk
+infinispanConfigFile=infinispan-clustered-tcp.xml
+words=UK
+ncrawlers=1
+sentimentAnalysisKeyFile=key.txt
+depth=3
+
+Parameter seed defines the first URL to crawl, words contains the list of words to search for, 
+integer ncrawlers defines the number of (local) concurrent threads that will crawl and key.txt defines the file 
+that contains the AlchemyAPI key to use (provided in the archive).
+Parameter depth configures the depth of the crawl, that is the length of the longest path in the crawling tree.

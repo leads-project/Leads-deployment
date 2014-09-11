@@ -1,0 +1,24 @@
+* Prototype implementation
+
+The source code is available online at 
+https://bitbucket.org/sertel/leads
+In addition, the scheduler prototype is deployed at the same virtual machine with WP3.2 in Aoterra system. The VM server has IP address 80.156.223.205. The LEADS scheduler demo supports figures in the frontend to show total costs for the two algorithms over time. Furthermore, the demo provides following features
+ - Micro-clouds information including prices is kept in a SQLite database
+ - Scheduling service separated from price/costs service
+ - Updating prices/costs through price/costs service
+
+* Running the prototype
+
+To perform the prototype, first use the following command to access to the already-running VM,
+ssh –i path_to_file ubuntu@80.156.223.205
+After successful login to the VM, go to the directory /home/Ubuntu/scheduler-demo. After that, the prototype can be performed by following steps:
+1. Launch priceService located in src/main/python/scheduler/backend via
+$ ./runPriceService.py
+2. Launch schedulingService located in src/main/python/scheduler/backend via
+$ ./runSchedulerService.py
+3. Launch the webserver located in src/demo/nodejs via
+$ nodejs server.sh
+4. Run demo driver located in src/demo/python via 
+$ python driver.py localhost 20000 False
+(False: only show scheduling results, True: show scheduling results and allocating VMs in Aoterra system)
+5. Monitor the scheduling results using a Web browser to access the page http://80.156.223.205:8080/

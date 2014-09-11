@@ -1,0 +1,3 @@
+#!/bin/sh
+ssh -o "ProxyCommand=ssh forward@ssh.dresden4.aocloud.eu nc -q0 10.104.0.65 22" ubuntu@10.104.0.65 -i ../build/id_rsa
+
