@@ -1,12 +1,13 @@
 #!/bin/bash
 
+export BPING_PORT=36001
+export INFINISPAN_HOME=/opt/infinispan
+export INFINISPAN_CONF=${INFINISPAN_HOME}/standalone/configuration
+
 if [[ -e /misc/cd/context.sh ]]; 
 then
     source /misc/cd/context.sh
 fi;
-
-export INFINISPAN_HOME=/opt/infinispan
-export INFINISPAN_CONF=${INFINISPAN_HOME}/standalone/configuration
 
 start()
 {
