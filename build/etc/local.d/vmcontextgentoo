@@ -78,7 +78,6 @@ gen_interface() {
     echo ""
 }
 
-
 start()
 {
     echo "Contexting VM"	    
@@ -93,8 +92,10 @@ start()
 	/etc/init.d/net.${DEV} start
     done
 
-    IP=`ifconfig eth0 | grep "inet addr" | cut -d: -f2 | awk '{print $1}'`
-    /bin/hostname ${IP}
+    IP=`ifconfig eth0 | grep "inet addr" | cut -d: -f2 | awk '{print $1}'`    
+    HOSTNAME="node-$(echo ${IP} | sed s/\\./\-/g)"
+    /bin/hostname ${HOSTNAME}
+    echo -e "${IP} \t ${HOSTNAME}" >> /etc/hosts
 }
 
 stop()

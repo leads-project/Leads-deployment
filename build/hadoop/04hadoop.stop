@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [[ -e /opt/hadoop ]]; 
+then
+    source /etc/local.d/hadoop
+    stop
+fi;
+

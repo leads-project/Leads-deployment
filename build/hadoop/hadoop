@@ -1,0 +1,47 @@
+#!/bin/bash
+
+export HADOOP_HOME=/opt/hadoop
+export HADOOP_CONF=${HADOOP_HOME}/etc/hadoop
+
+if [[ -e /misc/cd/context.sh ]]; 
+then
+    source /misc/cd/context.sh
+fi;
+
+start()
+{
+    echo "Starting Hadoop"
+    NODE_IP=`ifconfig eth0 | grep "inet addr" | cut -d: -f2 | gawk '{print $1}'`
+
+    cp ${HADOOP_CONF}/slaves.tmpl ${HADOOP_CONF}/slaves
+    for s in ${HADOOP_SLAVES}
+    do 
+	echo ${s} >> ${HADOOP_CONF}/slaves
+    done
+    sed s/\@HDFS_NAMENODE\@/${HDFS_NAMENODE}/g ${HADOOP_CONF}/core-site.xml.tmpl  > ${HADOOP_CONF}/core-site.xml
+    sed s/\@NODE_IP\@/${NODE_IP}/g ${HADOOP_CONF}/hdfs-site.xml.tmpl  | sed s/\@HADOOP_SLAVES\@/${HADOOP_SLAVES}/g > ${HADOOP_CONF}/hdfs-site.xml
+    sed s/\@MAPRED_TRACKER\@/${MAPRED_TRACKER}/g ${HADOOP_CONF}/mapred-site.xml.tmpl  > ${HADOOP_CONF}/mapred-site.xml
+    sed s/\@MAPRED_TRACKER\@/${MAPRED_TRACKER}/g ${HADOOP_CONF}/yarn-site.xml.tmpl  > ${HADOOP_CONF}/yarn-site.xml
+
+    echo "Starting HDFS"
+    if [ "${HDFS_NAMENODE}" == "${NODE_IP}" ];
+    then
+	${HADOOP_HOME}/bin/hdfs namenode -format &> /dev/null
+	${HADOOP_HOME}/sbin/hadoop-daemon.sh --config ${HADOOP_CONF} --script hdfs start namenode &> /dev/null
+    fi
+    ${HADOOP_HOME}/sbin/hadoop-daemon.sh --config ${HADOOP_CONF} --script hdfs start datanode &> /dev/null
+    
+    echo "Starting YARN"
+    if [ "${MAPRED_TRACKER}" == "${NODE_IP}" ];
+    then
+	${HADOOP_HOME}/sbin/yarn-daemon.sh --config ${HADOOP_CONF} start resourcemanager &> /dev/null
+    fi
+    ${HADOOP_HOME}/sbin/yarn-daemon.sh --config ${HADOOP_CONF} start nodemanager &> /dev/null
+
+}
+
+stop()
+{
+    echo "Stopping Hadoop"
+    ${HADOOP_HOME}/sbin/stop-all.sh
+}
