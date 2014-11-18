@@ -3,7 +3,7 @@
 source configuration.sh
 
 NAME="ispn1"
-NISPN="6"
+NISPN="3"
 BPING_PORT="26001"
 
 # for each IP
