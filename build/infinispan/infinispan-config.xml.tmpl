@@ -126,7 +126,7 @@
     <subsystem xmlns="urn:infinispan:server:core:7.0" default-cache-container="@BPING_PORT@">
       <cache-container name="@BPING_PORT@" default-cache="default" statistics="true">	
 	<transport executor="infinispan-transport" lock-timeout="60000" stack="udp"/>
-	<distributed-cache name="default" mode="SYNC" segments="20" owners="2" remote-timeout="30000" start="EAGER">
+	<distributed-cache name="default" mode="SYNC" segments="20" owners="1" remote-timeout="30000" start="EAGER">
 	  <indexing index="ALL">
 	    <property name="default.directory_provider">ram</property>
 	  </indexing>
@@ -159,11 +159,6 @@
          	      read-only="false"
                	      purge="false" path="/hdfs"/>
 	</distributed-cache>
-	<distributed-cache name="memcachedCache" mode="SYNC" segments="20" owners="2" remote-timeout="30000" start="EAGER">
-	  <locking acquire-timeout="30000" concurrency-level="1000" striping="false"/>
-	  <transaction mode="NONE"/>
-	</distributed-cache>
-	<distributed-cache name="namedCache" mode="SYNC" start="EAGER"/>
       </cache-container>
       <cache-container name="security"/>
     </subsystem>

@@ -2,8 +2,8 @@
 
 source configuration.sh
 
-NAME="ispn1"
-NISPN="3"
+NAME="ispn"
+NISPN="2"
 BPING_PORT="26001"
 
 # for each IP
@@ -11,7 +11,7 @@ BPING_PORT="26001"
 # then instanciate vm with the appropriate name
 for i in `seq 1 ${NISPN}`
 do
-    echo "Instanciating infinispan #${i} (${NAME})"
+    echo "Instanciating infinispan #${i}"
     sed s/\@BPING_PORT\@/"${BPING_PORT}"/ ${ISPN_TMPL_FILE} > tmp
     scp tmp ${USER}@${CLUSTER}:~/
     ${SSHCMDHEAD} onetemplate update ${ISPN_TMPL_ID} tmp

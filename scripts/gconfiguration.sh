@@ -10,6 +10,6 @@ ID_DATASTORE="100"
 ONE_AUTH_FILE="/home/psutra/one_auth"
 
 SSHCMDHEAD="ssh -l ${USER} ${CLUSTER} ONE_AUTH=${ONE_AUTH_FILE}"
-SSHCMDNODE="ssh -l root -i ${HOME_DIR}/build/id_rsa"
+SSHCMDNODE="ssh"
 
 

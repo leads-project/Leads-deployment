@@ -4,7 +4,7 @@ DIR_ROOT="/home/otrack/Implementation/Leads-deployment"
 DIR_IMG="${DIR_ROOT}/images"
 
 ### Images
-IMG_GENTOO="${DIR_IMG}/gentoo.img"
+IMG_GENTOO="${DIR_IMG}/leads.img"
 IMG_OPT="${DIR_IMG}/opt.img"
 IMG_SQFS_PORTAGE="${DIR_IMG}/portage.img"
 IMG_SQFS_KERNEL_SRC="${DIR_IMG}/kernel-src.img"
